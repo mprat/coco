@@ -45,7 +45,7 @@ classdef CocoUtils
       for i=1:n, nm=[is{i} '.jpg'];
         f=[dev '/VOC' year '/Annotations/' is{i} '.xml'];
         R=PASreadrecord(f); hw=R.imgsize([2 1]); O=R.objects;
-        id=str2double(is{i}); ignore=[O.difficult]; bbs=cat(1,O.bbox);
+        id=str2double(strrep(is{i}, '_', '')); ignore=[O.difficult]; bbs=cat(1,O.bbox);
         t=catsMap.values({O.class}); catIds=[t{:}]; iscrowd=ignore*0;
         data=CocoUtils.addData(data,nm,id,hw,catIds,ignore,iscrowd,bbs);
       end
